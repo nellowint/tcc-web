@@ -1,0 +1,65 @@
+{% extends 'tcc/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="mdl-tabs__tab-bar">
+        <a href="#vt_feedback" class="mdl-tabs__tab">Feedback</a>
+        <a href="#vt_search" class="mdl-tabs__tab is-active">Pesquisas</a>
+        <a href="#vt_question" class="mdl-tabs__tab">Questões</a>
+    </div>
+    <div class="mdl-tabs__panel" id="vt_feedback">
+        <div class="vt-size__mw-1080 mdl-grid">
+            {% for feed in feedback %}
+                <div class="vt-size__mw-300 mdl-card mdl-cell mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">{{feed.user}}</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <h6>{{feed}}</h6>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                    {% for answer in feed.answers.all %}
+                        <h7>{{answer.question}} {{answer}}</h7><br><br>
+                    {% endfor %}
+                    </div>
+                    <div class="mdl-card__menu">
+                        <a class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent" href="{% url 'feedback_remove' pk=feed.pk %}"><i class="material-icons">delete</i></a>
+                    </div>
+                </div>
+            {% empty %}
+                {% include 'tcc/include/snackbar_include.html' with text='Não há feedback no momento :(' %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="mdl-tabs__panel" id="vt_question">
+        <div class="vt-size__mw-1080 mdl-grid">
+            {% for question in questions %}
+                <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">{{question.id}}) {{question}}</h2>
+                    </div>
+                    <div class="vt-chart-feedback vt-overflow__x-a mdl-card__actions mdl-card--border" data-title="{{question}}"></div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="mdl-tabs__panel is-active" id="vt_search">
+        <div class="vt-size__mw-1080 mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Produtos visualizados</h2>
+                </div>
+                <div class="vt-chart-prod vt-overflow__x-a mdl-card__actions mdl-card--border"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="url_feed" data-url="{% url 'feedback_get' %}"></div>
+<div id="url_search" data-url="{% url 'search_history_get' %}"></div>
+{% endblock %}
+{% block js %}
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="{% static 'js/google_charts.js' %}"></script>
+    <script src="{% static 'js/snackbar_include.js' %}"></script>
+{% endblock %}

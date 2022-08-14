@@ -1,0 +1,44 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Trabalho de Conclusão de Curso">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>TCC - Login</title>
+
+    <link rel="icon" sizes="192x192" href="{% static 'images/icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/icon.png' %}">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_green-indigo.min.css" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+</head>
+<body>
+    <main class="mdl-layout__container mdl-color--grey-100">
+        <div class="vt-size__mw-500 mdl-grid">
+            <form method="post" action="{% url 'login' %}" class="vt-padding__20 vt-align-items__c mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+                {% csrf_token %}
+                <img class="vt-size__h-140" src="{% static 'images/icon.png' %}">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" name="{{form.username.name}}" maxlength="{{form.username.field.max_length}}" required autofocus id="{{form.username.id_for_label}}">
+                    <label class="mdl-textfield__label" for="{{form.username.id_for_label}}">{{form.username.label}}</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" name="{{form.password.name}}" required id="{{form.password.id_for_label}}">
+                    <label class="mdl-textfield__label" for="{{form.password.id_for_label}}">{{form.password.label}}</label>
+                </div>
+                {% if form.errors %}
+                    <p>Seu nome de usuário e senha não correspondem. Por favor, tente novamente.</p>
+                {% endif %}
+
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
+                    Login
+                </button>
+                <input type="hidden" name="next" value="{{ next }}"/>
+            </form>
+        </div>
+    </main>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</body>

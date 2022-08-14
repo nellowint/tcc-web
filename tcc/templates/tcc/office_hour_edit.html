@@ -1,0 +1,20 @@
+{% extends 'tcc/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <form method="POST" class="vt-size__mw-500 vt-color__white vt-padding__20 vt-margin__t-10 vt-margin__b-10 mdl-grid mdl-shadow--2dp">
+        <div class="mdl-cell mdl-cell--12-col">
+            {% csrf_token %}
+            {% include 'tcc/include/date_include.html' with field=form.date extra='autofocus' %}
+            {% include 'tcc/include/time_include.html' with field=form.hour_start extra='required' %}
+            {% include 'tcc/include/time_include.html' with field=form.hour_final extra='required' %}
+            {% include 'tcc/include/select_include.html' with field=form.weekday extra='required' %}
+            {% include 'tcc/include/form_errors_include.html' %}
+        </div>
+        {% include 'tcc/include/snackbar_include.html' with text=message %}
+        {% include 'tcc/include/button_form_include.html' with src='store_list' %}
+    </form>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/snackbar_include.js' %}"></script>
+{% endblock %}

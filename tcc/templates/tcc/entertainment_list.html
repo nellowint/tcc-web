@@ -1,0 +1,39 @@
+{% extends 'tcc/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="mdl-grid">
+    {% for entertainment in entertainments %}
+        <div class="vt-size__mw-300 mdl-card mdl-cell mdl-shadow--2dp">
+            <div class="vt-size__mw-09 vt-display__b mdl-card__title">
+                <h2 class="mdl-card__title-text show-dialog">{{entertainment}}</h2>
+                <h6 class="mdl-card__subtitle-text">{{entertainment.category}}</h6>
+            </div>
+            <div class="vt-align-self__c mdl-card__media">
+                <img src="{{entertainment.image.url}}" class="vt-size__h-200">
+            </div>
+            <div class="mdl-card__supporting-text">
+                {% if entertainment.sub_desc %}
+                    {{entertainment.desc|truncatechars:100}}
+                {% else %}
+                    {{entertainment.desc|truncatechars:300}}
+                {% endif %}
+            </div>
+            {% if entertainment.sub_desc %}
+            <div class="mdl-card__supporting-text">
+                Modo de preparo<br>
+                {{entertainment.sub_desc|truncatechars:100}}
+            </div>
+            {% endif %}
+            {% include 'tcc/include/card_menu_include.html' with object=entertainment class='entertainment' src_edit='entertainment_edit' src_remove='entertainment_remove' %}
+        </div>
+    {% empty %}
+        {% include 'tcc/include/snackbar_include.html' with text='Não há entretenimento cadastrado no momento' %}
+    {% endfor %}
+</div>
+<div class="vt-spacer__v-80"></div>
+{% include 'tcc/include/float_button_include.html' with src='entertainment_new' button='add' %}
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/snackbar_include.js' %}"></script>
+{% endblock %}

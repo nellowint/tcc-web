@@ -1,0 +1,10 @@
+<div class="mdl-card__menu">
+    <button id="id_{{class}}_{{object.id}}" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">more_vert</i>
+    </button>
+
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="id_{{class}}_{{object.id}}">
+        <a href="{% url src_edit pk=object.pk %}"><li class="mdl-menu__item">Editar</li></a>
+        <a href="{% url src_remove pk=object.pk %}"><li class="mdl-menu__item">Remover</li></a>
+    </ul>
+</div>

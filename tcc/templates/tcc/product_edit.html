@@ -1,0 +1,23 @@
+{% extends 'tcc/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data" class="vt-size__mw-500 vt-color__white vt-padding__20 vt-margin__t-10 vt-margin__b-10 mdl-grid mdl-shadow--2dp">
+        <div class="mdl-cell mdl-cell--12-col">
+            {% csrf_token %}
+            {% include 'tcc/include/image_include.html' with field=form.image %}
+            {% include 'tcc/include/text_include.html' with field=form.name extra='required autofocus' %}
+            {% include 'tcc/include/select_include.html' with field=form.category extra='required' %}
+            {% include 'tcc/include/select_include.html' with field=form.measure extra='required' %}
+            {% include 'tcc/include/number_include.html' with field=form.value extra='required' %}
+            {% include 'tcc/include/checkbox_include.html' with field=form.offer %}
+            {% include 'tcc/include/date_include.html' with field=form.validate %}
+            {% include 'tcc/include/select_include.html' with field=form.store extra='required multiple="multiple"' %}
+            {% include 'tcc/include/form_errors_include.html' %}
+        </div>
+        {% include 'tcc/include/button_form_include.html' with src='product_list' %}
+    </form>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/image_include.js' %}"></script>
+{% endblock %}

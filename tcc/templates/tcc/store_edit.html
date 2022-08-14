@@ -1,0 +1,30 @@
+{% extends 'tcc/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data" class="vt-size__mw-1080 vt-color__white vt-padding__20 vt-margin__t-10 vt-margin__b-10 mdl-grid mdl-shadow--2dp">
+        <div class="mdl-cell mdl-cell--12-col mdl-grid">
+            {% csrf_token %}
+            <div class="vt-align-items__c mdl-cell mdl-cell--5-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+                {% include 'tcc/include/image_include.html' with field=form.image %}
+                {% include 'tcc/include/text_include.html' with field=form.name extra='required autofocus' %}
+                {% include 'tcc/include/text_include.html' with field=form.address extra='required' %}
+                {% include 'tcc/include/text_include.html' with field=form.neighborhood extra='required' %}
+                {% include 'tcc/include/text_include.html' with field=form.city extra='required' %}
+                {% include 'tcc/include/text_include.html' with field=form.phone extra='required' %}
+                {% include 'tcc/include/text_include.html' with field=form.email %}
+                {% include 'tcc/include/select_include.html' with field=form.office_hour extra='required multiple="multiple"' %}
+                <input type="text" hidden name="{{form.latitude.name}}" value="{{form.latitude.value|default_if_none:'-26.1667'}}" required maxlength="{{form.latitude.field.max_length}}" id="{{form.latitude.id_for_label}}">
+                <input type="text" hidden name="{{form.longitude.name}}" value="{{form.longitude.value|default_if_none:'-50.4'}}" required maxlength="{{form.longitude.field.max_length}}" id="{{form.longitude.id_for_label}}">
+                {% include 'tcc/include/form_errors_include.html' %}
+            </div>
+            <div id="map" class="vt-size__w-1 vt-size__h-500 mdl-cell mdl-cell--7-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone"></div>
+        </div>
+        {% include 'tcc/include/button_form_include.html' with src='store_list' %}
+    </form>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/image_include.js' %}"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<YOUR_API_KEY_HERE>&callback=initMap"></script>
+{% endblock %}

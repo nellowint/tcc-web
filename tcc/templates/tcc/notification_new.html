@@ -1,0 +1,24 @@
+{% extends 'tcc/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <form method="POST" class="vt-size__mw-500 vt-color__white vt-padding__20 vt-margin__t-10 vt-margin__b-10 mdl-grid mdl-shadow--2dp">
+        <div class="mdl-cell mdl-cell--12-col">
+            {% csrf_token %}
+            {% include 'tcc/include/text_include.html' with field=form.title extra='required autofocus'  %}
+            {% include 'tcc/include/number_include.html' with field=form.priority extra='required' %}
+            {% include 'tcc/include/text_area_include.html' with field=form.body extra='required'  %}
+            {% include 'tcc/include/form_errors_include.html' %}
+        </div>
+        {% include 'tcc/include/snackbar_include.html' with text=message %}
+        <div class="vt-align-items__c mdl-cell mdl-cell--12-col">
+            <button id="vt_button_save" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" autofocus type="submit">
+                Criar
+            </button>
+            <div class="mdl-tooltip mdl-tooltip--large" for="vt_button_save">As notificações são criadas para todos os usuários</div>
+        </div>
+    </form>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/snackbar_include.js' %}"></script>
+{% endblock %}

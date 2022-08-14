@@ -1,0 +1,7 @@
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="{{type|default_if_none:'text'}}" name="{{field.name}}" value="{{field.value|default_if_none:''}}" {{extra}} maxlength="{{field.field.max_length}}" id="{{field.id_for_label}}">
+    <label class="mdl-textfield__label" for="{{field.id_for_label}}">{{field.label}}</label>
+    <span class="mdl-textfield__error">Campo obrigatório</span>
+</div>
+<i id="vt_help_text_{{field.id_for_label}}" class="material-icons">help</i>
+<div class="mdl-tooltip" for="vt_help_text_{{field.id_for_label}}">{{field.help_text}}</div>

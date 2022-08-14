@@ -1,0 +1,13 @@
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <select class="mdl-textfield__input" name="{{field.name}}" id="{{field.id_for_label}}" {{extra}}>
+        {% for value, option in field.field.choices %}
+            <option value="{{value}}"
+            {% if value == field.value or value in field.value %}
+                 selected 
+            {% endif %}
+            >{{option}}</option>
+        {% endfor %}
+    </select>
+    <label class="vt-top__4 mdl-textfield__label" for="{{field.id_for_label}}">{{field.label}}</label>
+    <span class="mdl-textfield__error">Campo obrigatório</span>
+</div>

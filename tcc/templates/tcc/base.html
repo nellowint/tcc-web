@@ -1,0 +1,66 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Trabalho de Conclusão de Curso">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>TCC</title>
+
+    <link rel="icon" sizes="192x192" href="{% static 'images/icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/icon.png' %}">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_green-indigo.min.css" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">{{title|default:'TCC'}}</span>
+                <div class="mdl-layout-spacer"></div>
+                <button id="demo-menu-lower-right"
+                        class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons">more_vert</i>
+                </button>
+
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    for="demo-menu-lower-right">
+                    {% if user.is_authenticated %}
+                        <li class="mdl-menu__item">{{user.username}}</li>
+                        <a href="{% url 'logout' %}">
+                            <li class="mdl-menu__item">Logout</li>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'login' %}">
+                            <li class="mdl-menu__item">Login</li>
+                        </a>
+                    {% endif %}
+                </ul>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Menu</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="{% url 'result_list' %}"><i class="material-icons">home</i> Início</a>
+                <a class="mdl-navigation__link" href="{% url 'entertainment_list' %}"><i class="material-icons">sentiment_very_satisfied</i> Entretenimentos</a>
+                <a class="mdl-navigation__link" href="{% url 'store_list' %}"><i class="material-icons">store_mall_directory</i> Lojas</a>
+                <a class="mdl-navigation__link" href="{% url 'product_list' %}"><i class="material-icons">pages</i> Produtos</a>
+                <a class="mdl-navigation__link" href="{% url 'user_list' %}"><i class="material-icons">account_circle</i> Usuários</a>
+                <a class="mdl-navigation__link" href="{% url 'notification_new' %}"><i class="material-icons">add_alert</i> Notificações</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content mdl-color--grey-100">
+            {% block content %} -->
+            {% endblock %}
+        </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+</body>
+{% block js %}
+{% endblock %}
+</html>

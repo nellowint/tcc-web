@@ -1,0 +1,53 @@
+{% extends 'tcc/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="mdl-tabs__tab-bar">
+        <a href="#vt_stores" class="mdl-tabs__tab is-active">Lojas</a>
+        <a href="#vt_office_hours" class="mdl-tabs__tab">Horários de Atendimento</a>
+    </div>
+    <div class="mdl-tabs__panel is-active" id="vt_stores">
+        <div class="mdl-grid">
+            {% for store in stores %}
+                <div class="vt-size__mw-300 mdl-card mdl-cell mdl-shadow--2dp">
+                    <div class="vt-size__mw-09 mdl-card__title">
+                        <h2 class="mdl-card__title-text">{{store}}</h2>
+                    </div>
+                    <div class="vt-align-self__c mdl-card__media">
+                        <img src="{{store.image.url}}" class="vt-size__h-200">
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Endereço:<br>
+                        * {{store.city}}<br>
+                        * {{store.address}}<br>
+                        * {{store.neighborhood}}<br>
+                        Contato:<br>
+                        * {{store.phone}}<br>
+                        * {{store.email|default_if_none:'(Sem e-mail)'}}
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Horário de atendimento:<br>
+                        {% for office_hour in store.office_hour.all %}
+                            * {{office_hour.get_weekday_display}}{% if office_hour.date %}, {{office_hour.date}}
+                            {% endif %}: {{office_hour.hour_start}} às {{office_hour.hour_final}}<br>
+                        {% endfor %}
+                    </div>
+                    {% include 'tcc/include/card_menu_include.html' with object=store class='store' src_edit='store_edit' src_remove='store_remove' %}
+                </div>
+            {% empty %}
+                {% include 'tcc/include/snackbar_include.html' with extra='data-js="Não há loja cadastrada no momento"' %}
+            {% endfor %}
+        </div>
+        <div class="vt-spacer__v-80"></div>
+        {% include 'tcc/include/float_button_include.html' with src='store_new' button='add' %}
+    </div>
+    <div class="mdl-tabs__panel" id="vt_office_hours">
+        {% include 'tcc/include/table_include.html' with title='Dia da semana e Horário' class='office_hour' src='office_hour_edit' objects=office_hours %}
+        {% include 'tcc/include/float_button_include.html' with src='office_hour_new' button='add' %}
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/snackbar_include.js' %}"></script>
+{% endblock %}

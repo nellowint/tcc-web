@@ -1,0 +1,62 @@
+{% extends 'tcc/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="mdl-tabs__tab-bar">
+        <a href="#vt_category" class="mdl-tabs__tab">Categorias</a>
+        <a href="#vt_product" class="mdl-tabs__tab is-active">Produtos</a>
+        <a href="#vt_measure" class="mdl-tabs__tab">Unidades de medida</a>
+    </div>
+    <div class="mdl-tabs__panel" id="vt_category">
+        {% include 'tcc/include/table_include.html' with title='Categoria' class='category' src='category_edit' objects=categories %}
+        {% include 'tcc/include/float_button_include.html' with src='category_new' button='add' %}
+    </div>
+    <div class="mdl-tabs__panel is-active" id="vt_product">
+        <div class="mdl-grid">
+            {% for product in products %}
+                <div class="vt-size__mw-250 mdl-card mdl-cell mdl-shadow--2dp">
+                    <div class="vt-size__mw-09 vt-display__b mdl-card__title">
+                        <h2 class="mdl-card__title-text">{{ product.name }} {{ product.measure }}</h2>
+                        <h6 class="mdl-card__subtitle-text">{{product.category}}</h6>
+                    </div>
+                    <div class="vt-align-self__c mdl-card__media">
+                        <img src="{{ product.image.url }}" class="vt-size__h-140">
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                    {% if product.offer %}
+                        Em oferta<br>
+                    {% endif %}
+                    {% if product.validate %}
+                        Preço válido até: {{ product.validate }}
+                    {% endif %}
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Disponível em:<br>
+                        {% for store in product.store.all %}
+                            * {{ store.name }}<br>
+                        {% endfor %}
+                    </div>
+                    <div class="vt-card__actions mdl-card__actions mdl-card--border">
+                        <span {% if product.offer %}class="vt-color__secondary"{% endif %}>
+                            R$ {{ product.value|floatformat:2 }}
+                        </span>
+                    </div>
+                    {% include 'tcc/include/card_menu_include.html' with object=product class='product' src_edit='product_edit' src_remove='product_remove' %}
+                </div>
+            {% empty %}
+                {% include 'tcc/include/snackbar_include.html' with text='Não há produtos cadastrados no momento' %}
+            {% endfor %}
+        </div>
+        <div class="vt-spacer__v-80"></div>
+        {% include 'tcc/include/float_button_include.html' with src='product_new' button='add' %}
+    </div>
+    <div class="mdl-tabs__panel" id="vt_measure">
+        {% include 'tcc/include/table_include.html' with title='Unidade de medida' class='measure' src='measure_edit' objects=measures %}
+        {% include 'tcc/include/float_button_include.html' with src='measure_new' button='add' %}
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/snackbar_include.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,41 @@
+<div class="vt-size__mw-500 vt-overflow__x-a mdl-grid">
+    <table class="mdl-cell mdl-cell--12-col mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">
+                    {{title}}
+                    <button id="id_remove_{{class}}" hidden class="vt-float__r mdl-button mdl-js-button mdl-button--icon mdl-button--accent">
+                        <i class="material-icons">delete</i>
+                    </button>
+                    <div class="mdl-tooltip" for="id_remove_{{class}}">
+                        Remover
+                    </div>
+                </th>
+                <th>
+                    Relações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in objects %}
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        <a id="id_{{class}}_{{object.pk}}" href="{% url src pk=object.pk %}">{{object}}</a>
+                        <div class="mdl-tooltip" for="id_{{class}}_{{object.pk}}">
+                            Editar
+                        </div>
+                    </td>
+                    <td>
+                        {{object.relationships}}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td>
+                        Sem cadastro
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

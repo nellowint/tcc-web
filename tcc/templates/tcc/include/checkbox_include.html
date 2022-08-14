@@ -1,0 +1,5 @@
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{field.id_for_label}}">
+    <input class="mdl-checkbox__input" type="checkbox" name="{{field.name}}" {% if field.value == True %}checked{% endif %} id="{{field.id_for_label}}" {{extra}}>
+    <span class="mdl-checkbox__label">{{field.label}}</span>
+    <span class="mdl-textfield__error">Campo obrigatório</span>
+</label>

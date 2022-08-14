@@ -1,0 +1,5 @@
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="time" name="{{field.name}}" value="{{field.value|default_if_none:''}}" {{extra}} id="{{field.id_for_label}}">
+    <label class="vt-top__4 mdl-textfield__label" for="{{field.id_for_label}}">{{field.label}}</label>
+    <span class="mdl-textfield__error">Campo obrigatório</span>
+</div>

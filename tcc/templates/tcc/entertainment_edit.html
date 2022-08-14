@@ -1,0 +1,21 @@
+{% extends 'tcc/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data" class="vt-size__mw-500 vt-color__white vt-padding__20 vt-margin__t-10 vt-margin__b-10 mdl-grid mdl-shadow--2dp">
+        <div class="mdl-cell mdl-cell--12-col">
+            {% csrf_token %}
+            {% include 'tcc/include/image_include.html' with field=form.image %}
+            {% include 'tcc/include/text_include.html' with field=form.name extra='required autofocus' %}
+            {% include 'tcc/include/select_include.html' with field=form.category extra='required' %}
+            {% include 'tcc/include/text_area_include.html' with field=form.desc extra='required' %}
+            {% include 'tcc/include/text_area_include.html' with field=form.sub_desc extra='data-js="required"' %}
+            {% include 'tcc/include/form_errors_include.html' %}
+        </div>
+        {% include 'tcc/include/button_form_include.html' with src='entertainment_list' %}
+    </form>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/image_include.js' %}"></script>
+    <script src="{% static 'js/text_area_include.js' %}"></script>
+{% endblock %}

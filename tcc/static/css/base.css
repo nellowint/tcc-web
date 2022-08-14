@@ -1,0 +1,142 @@
+
+a {
+    text-decoration: none;
+}
+
+.vt-align-items__c {
+    align-items: center;
+}
+
+.vt-align-self__c {
+    align-self: center;
+}
+
+.vt-card__actions {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.vt-display__b {
+    display: block;
+}
+
+.vt-margin__10 {
+    margin: 10px;
+}
+
+.vt-margin__t-10 {
+    margin-top: 10px;
+}
+
+.vt-margin__b-10 {
+    margin-bottom: 10px;
+}
+
+.vt-margin__r-10 {
+    margin-right: 10px;
+}
+
+.vt-overflow__x-a {
+    overflow-x: auto;
+}
+
+.vt-padding__20 {
+    padding: 20px;
+}
+
+.vt-size__mw-200 {
+    max-width: 200px;
+}
+
+.vt-size__mw-250 {
+    max-width: 250px;
+}
+
+.vt-size__mw-300 {
+    max-width: 300px;
+}
+
+.vt-size__mw-500 {
+    max-width: 500px;
+}
+
+.vt-size__mw-800 {
+    max-width: 800px;
+}
+
+.vt-size__mw-1080 {
+    max-width: 1080px;
+}
+
+.vt-size__mw-09 {
+    max-width: 90%;
+}
+
+.vt-size__mw-1 {
+    max-width: 100%;
+}
+
+.vt-size__w-1 {
+    width: 100%;
+}
+
+.vt-size__mh-330 {
+    max-height: 330px;
+}
+
+.vt-size__h-140 {
+    height: 140px;
+}
+
+.vt-size__h-200 {
+    height: 200px;
+}
+
+.vt-size__h-500 {
+    height: 500px;
+}
+
+.vt-size__icon-128 {
+    font-size: 128px;
+}
+
+.vt-color__secondary {
+    color: #536dfe;
+}
+
+.vt-color__white {
+    background-color: #fff;
+}
+
+.vt-float__r {
+    float: right;
+}
+
+.vt-visibility__hidden{
+    visibility: hidden;
+}
+
+.vt-position__r {
+    position: relative;
+}
+
+.vt-position__a-t-r {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+.vt-position__f-b-r {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 2;
+}
+
+.vt-spacer__v-80 {
+    height: 80px;
+}
+
+.vt-top__4 {
+    top: 4px;
+}

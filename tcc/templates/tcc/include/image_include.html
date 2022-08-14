@@ -1,0 +1,17 @@
+{% load staticfiles %}
+
+<div class="vt-position__r">
+    {% if field.value.url != null %}
+        <img class="vt-size__mw-1 vt-size__mh-330 vt-image" src="{{field.value.url}}">
+    {% else %}
+        <img class="vt-size__mw-1 vt-size__mh-330 vt-image" src="{% static 'images/icon-256.png' %}">
+    {% endif %}
+    
+    <label id="vt_label_edit" for="{{field.id_for_label}}" class="vt-position__a-t-r mdl-button mdl-js-button mdl-button--icon mdl-button--accent"><i class="material-icons">edit</i></label>
+    <div class="mdl-tooltip" for="vt_label_edit">Alterar imagem</div>
+    <input class="vt-image-input" type="file" hidden name="{{field.name}}" id="{{field.id_for_label}}" accept=".jpeg, .png">
+    <div id="vt-snackbar" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+</div>

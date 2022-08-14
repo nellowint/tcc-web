@@ -1,0 +1,5 @@
+<div class="vt-size__w-1 mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <textarea class="mdl-textfield__input" name="{{field.name}}" {{extra}} id="{{field.id_for_label}}" rows="10">{{field.value|default_if_none:''}}</textarea>
+    <label class="mdl-textfield__label" for="{{field.id_for_label}}">{{field.label}}</label>
+    <span class="mdl-textfield__error">Campo obrigatório</span>
+</div>
