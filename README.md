@@ -2,7 +2,15 @@
 
 Este repositório foi criado para gerenciar o app tcc-web no desenvolvimento do Trabalho de Conclusão de Curso de Tecnologia em Análise e Desenvolvimento de Sistemas.
 
-## tcc
+### Concluído em 12/2018
+
+Autores: 
+
+[Wellinton Vieira dos Santos](https://github.com/wellintonvieira)
+
+[Vinicius Vieira dos Santos](https://github.com/viniciusvsantos)
+
+#
 
 Este app foi desenvolvido em python utilizando o framework django e uso do SGBD MySQL Community Server.
 
