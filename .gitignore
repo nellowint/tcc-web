@@ -8,4 +8,4 @@ db.sqlite3
 .directory
 media/
 migrations/
-/tccproject/settings.py
+tccproject/settings.py
